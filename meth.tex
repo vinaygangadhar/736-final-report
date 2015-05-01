@@ -1,0 +1,8 @@
+\section{Methodology and Evaluation}\label{sec:meth}
+	This also lists the resources we will be using for our project.
+
+For our study, we will be modifying a stable version of Linux kernel with ACPI and Smart battery interface support. PinTool~\cite{pin} will be used for profiling applications and categorize them into different buckets. To get initial estimates of power/energy consumption of applications, we plan to use two methods -- Our first method uses the ACPI interface to measure the runtime energy (battery) consumption at specific time intervals (epochs) based on the average execution time of all the applications and second method is to use a simulator integrated with energy measurement tool (Just to see whether our measurements co-relate). 
+We plan to develop a energy decision table, with category of application on one dimension and concerned energy rule/target on the other. This decision table will be used to develop policies in Linux power governor.  
+Evaluation will be done by determining the performance and energy for all the applications with E-MOS implemented. Performance counters (RAPL tool) and again standard ACPI interface for energy measurements will be used.
+Finally, we will compare it with runs on standard Linux platform. 
+

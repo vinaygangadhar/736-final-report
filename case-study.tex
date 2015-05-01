@@ -1,0 +1,28 @@
+\section{Imperfect scaling}\label{sec:case-study}
+
+An implicit assumption about CPU usage is that if the CPU is in use, on any particular microprocessor, the performance should scale with frequency, and moreover it should scale perfectly, since if the processor is being used, running it twice as fast naturally makes the processor run twice as fast. The problem though is that there exist operations the processor conducts which are independent of it's clock frequency, most commonly IO and memory accesses. In the case of IO accesses, there is not a concern from our perspective since these occur slowly enough for the operating system to notice. But in the case of memory accesses, these occur quickly enough that there is no opertunity for the operating system to intervene, so from the perspective of the OS the CPU is under full utilization while the memory is being read, On the otherhand, the time to access memory is independent of the frequency of the processor, so running at a speed matching that of memory can increase efficiency.
+
+This is demonstrated clearly in the following benchmark. One graph is of a program called cache\_misser which is set up to randomly read and write a 32mb array, the random nature of the accesses causes cache misses. normal on the otherhand is setup to read and write a 32mb array sequentially, causing fewer cache misses. We then measured the time for exectuion. Below we have graphed the number of clock cyles it took to execute, as a functino of frequency, normalized such that both are 1 at 1200 Mhz. Note that the red normal process line is motly flat, as would be expected with perfect scaling. On the otherhand, the cache misser process, after an initial period of being relatively flat, soon goes into a stedy climb, showing an increase in processing time.
+
+\if 0
+%TODO graph goes here
+\begin{tikzpicture}
+  \begin{axis}[
+      ylabel={\footnotesize Cycles per operation normalized},
+      xlabel={\footnotesize Frequency (MHz)},
+    ]
+    \addplot table[y expr=\thisrowno0*\thisrowno1/(1200*3.43)] {./cache_misser_data.txt};
+    \addplot table[y expr=\thisrowno0*\thisrowno1/(1200*1.66)]  {./normal_data.txt};
+  \end{axis}
+\end{tikzpicture}
+\fi
+
+
+In this case for the cache\_misser microbenchmark, it appears the most efficient frequency to run it at would be arround 1600MHz. We compare this with the decision of the ondemand govener.
+
+Note though that even here, the time to execute is still decreasing.
+
+To some extent this issue is addressed in hardware, in particular, the existance of the cache means that in many programs, most memory accesses are fast enough that there is not a serious slowdown. Second with modern processors out of order exectuion means that work that requires memory accesses can be interleved with work that doesn't. Further with hyperthreading, one can in theory utilize the time that one virtual core is waiting on memory by running anothe process.
+
+Nonetheless, with some types of workloads, the inevitable contraint is memory bandwith and/or latency, and in these cases a decrease in cpu frequency may lead to efficiency gains.
+

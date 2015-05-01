@@ -1,0 +1,11 @@
+\section{Project phases}\label{sec:plan}
+The project will be distributed into multiple phases, but some phases are 
+orthogonal so that it can be implemented in parallel among the project members.
+
+\begin{itemize}
+\item \textbf{Phase 0:} Picking an application suite representative of typical Linux system (Single/Multi-threaded, I/O, Memory bound).  
+\item \textbf{Phase 1:} Profiling the applications and categorizing them into different buckets -- CPU intensive, Memory intensive, I/O intensive. Determine the energy needs for each bucket.
+\item \textbf{Phase 2:} Implement framework to collect dynamic information about battery resource, CPU utilization, memory frequency (ACPI and Smart battery interfaces are good place to start). This has to be fed to power governors at specific time intervals to make certain decisions to actually reduce the CPU frequency or go into a lower system power mode. A decision table data structure to be formulated here based on application requirement and actual energy resource available. 
+\item \textbf{Phase 2:} Implementing a Linux power governor to support policies/mechanisms for the energy decisions to be taken based on information obtained in Phase 1 and Phase 2. User-space power governors could be a good place to start.  
+\item \textbf{Phase 4:} Analyze and compare/reason-out the effects of the energy policies implemented in E-MOS with standard Linux platform. 
+\end{itemize}
