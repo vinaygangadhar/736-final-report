@@ -4,7 +4,6 @@ An implicit assumption about CPU usage is that if the CPU is in use, on any part
 
 This is demonstrated clearly in the following benchmark. One graph is of a program called cache\_misser which is set up to randomly read and write a 32mb array, the random nature of the accesses causes cache misses. normal on the otherhand is setup to read and write a 32mb array sequentially, causing fewer cache misses. We then measured the time for exectuion. Below we have graphed the number of clock cyles it took to execute, as a functino of frequency, normalized such that both are 1 at 1200 Mhz. Note that the red normal process line is motly flat, as would be expected with perfect scaling. On the otherhand, the cache misser process, after an initial period of being relatively flat, soon goes into a stedy climb, showing an increase in processing time.
 
-\if 0
 %TODO graph goes here
 \begin{tikzpicture}
   \begin{axis}[
@@ -15,7 +14,6 @@ This is demonstrated clearly in the following benchmark. One graph is of a progr
     \addplot table[y expr=\thisrowno0*\thisrowno1/(1200*1.66)]  {./normal_data.txt};
   \end{axis}
 \end{tikzpicture}
-\fi
 
 
 In this case for the cache\_misser microbenchmark, it appears the most efficient frequency to run it at would be arround 1600MHz. We compare this with the decision of the ondemand govener.
