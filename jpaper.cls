@@ -29,7 +29,7 @@
 \ProcessOptions
 
 % Load the underlying article class.
-\LoadClass[letterpaper,10pt,twocolumn]{article}
+\LoadClass[letterpaper,11pt,twocolumn]{article}
 
 
 % Standard packages.
@@ -52,7 +52,7 @@
 \widowpenalty=300 \clubpenalty=300
 
 % Page margins:
-% 3/4" left and right, 1" top, 1 1/8" bottom.
+% 1" left and right, 1" top, 1 1/8" bottom.
 \RequirePackage{geometry}
 \geometry{lmargin=0.75in,rmargin=0.75in,tmargin=1in,bmargin=1in}
 
