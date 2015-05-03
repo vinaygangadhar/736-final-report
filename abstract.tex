@@ -1,4 +1,30 @@
-\section{Abstract}\label{sec:abstract}
+\begin{abstract} \vspace{0.05in}
 
-	Current Linux Operating Systems' power governors do not provide a fine-grained control and management over the energy utilized by the applications running on a computing system. Linux power governors can either be set to statically scale the CPU frequency or they provide limited user capability to define the energy requirements of an application. These power governors operate on a generic energy management policy, which is based on the assumption that reducing frequency of CPU (using DVFS) or putting the system to low-power state would reduce the system energy always, without having necessary information about the application. In this project, we plan to enhance the Linux OS to have better energy management policies/mechanisms by first analyzing the resource consumption (CPU, Memory, I/O) of the applications and then using this application information to make better energy decisions in the kernel. Our E-MOS aims to provide improved energy efficiency to applications by having a fine-grained control over the energy (battery) resource.
+Current Linux Operating Systems' power governors do not provide a fine-grained control and management 
+over the energy utilized by the applications running on a computing system. 
+Linux power governors by default use "Ondemand" CPU frequency governor for 
+power management by considering the entire system load rather than individual application requirements. 
+This system-wide and default kernel policy could have undesirable effects of OS power management 
+and could lead to poor battery life and performance, 
+atleast for modern CPUs.
+%Linux power governors operate on a generic energy management policy,
+%based on the assumption that reducing frequency of CPU (using DVFS) or 
+%putting the system to low-power state would reduce the system energy always,
+%without having necessary information about the application. 
+In this project, we provide an overview of the difficulties of Linux OS power management system and 
+reason out the anomalies with different existing Linux power governors.
+
+We present E-MOS (Efficient Energy Management Policies in Operating Systems),
+a model which uses pre-characterized information of applications, to 
+make decisions of frequency scaling to achieve 
+better performance and energy efficiency. An application aware policy
+can be applied using Linux User-space power governors, to
+tradeoff performance and energy consumption. E-MOS is
+evaluated on variety of benchmarks and we see energy savings 
+upto X\% for a Y\% performance loss.
+
+
+
+
+\end{abstract}
 

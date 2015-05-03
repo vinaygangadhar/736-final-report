@@ -1,8 +1,12 @@
-\section{Imperfect scaling}\label{sec:case-study}
+\section{Imperfect Scaling Study}\label{sec:case-study}
 
-An assumption often made, with respect to power usage is that on a given CPU, changing the frequency will change the CPU performance by the corresponding amount, this however is only true when considering CPU execution, there exist other pieces who's performance do not scale along with CPU frequency, one example would be memory. CPU caches hide much of this latency, but cache misses can be particularly damaging to efficiency, since the time frame is too short for the operating system to handle them intelligently, or even be aware of them except retrospectively, yet they take long enough that they measurably decrease performance and or efficiency.
+An assumption often made, with respect to the power usage 
+is that on a given CPU, changing the frequency will change the CPU performance by the corresponding amount.
+However, this is only true when considering CPU execution, 
+but there exist other pieces who's performance do not scale along with CPU frequency.
+One example would be memory. CPU caches hide much of this latency, but cache misses can be particularly damaging to efficiency, since the time frame is too short for the operating system to handle them intelligently, or even be aware of them except retrospectively, yet they take long enough that they measurably decrease performance and or efficiency.
  
-To demonstrate this effect, we wrote the following microbenchmark, where a process takes a large (32mb) array and copies a random entry to another random entry. Then we set the CPU to a variety of frequencies and measured execution time.  This was then compared to another process that did the same type of work, copying data from one point to another, but did so sequentially, thus avoiding most of the cache misses. As expected for both processes the time to execute decreases as CPU frequency increase, but more interestingly, we can also plot the efficiency, computed here as the time to execute times the frequency, which represents the number of clock cycles required to execute the process. For ease of comparison these were then normalized.
+To demonstrate this effect, we wrote the following microbenchmark, where a process takes a large (32MB) array and copies a random entry to another random entry. Then we set the CPU to a variety of frequencies and measured execution time.  This was then compared to another process that did the same type of work, copying data from one point to another, but did so sequentially, thus avoiding most of the cache misses. As expected for both processes the time to execute decreases as CPU frequency increase, but more interestingly, we can also plot the efficiency, computed here as the time to execute times the frequency, which represents the number of clock cycles required to execute the process. For ease of comparison these were then normalized.
 
 %Terrible hack
 %note this may break if the graph ends up in the other column so if the graph is too far left, adjust this
