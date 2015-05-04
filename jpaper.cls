@@ -131,12 +131,12 @@
 \setcounter{dbltopnumber}{2}
 \setcounter{bottomnumber}{2}
 \setcounter{totalnumber}{4}
-\renewcommand{\topfraction}{0.85}
-\renewcommand{\dbltopfraction}{0.9}
-\renewcommand{\bottomfraction}{0.85}
-\renewcommand{\textfraction}{0.07}
-\renewcommand{\floatpagefraction}{0.85}
-\renewcommand{\dblfloatpagefraction}{0.85}
+\renewcommand{\topfraction}{0.55}
+\renewcommand{\dbltopfraction}{0.55}
+\renewcommand{\bottomfraction}{0.55}
+\renewcommand{\textfraction}{0.37}
+\renewcommand{\floatpagefraction}{0.55}
+\renewcommand{\dblfloatpagefraction}{0.55}
 
 \setlength{\floatsep}{0.5em plus 0.2em minus 0.2em}
 \setlength{\dblfloatsep}{0.5em plus 0.2em minus 0.2em}

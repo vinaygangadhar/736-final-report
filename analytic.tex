@@ -1,3 +1,25 @@
-\section{Analyitcal Modeling}\label{sec:analytic}
+\section{Analytical Modeling}\label{sec:analytic}
 
 \fixme{To be added: Decision Table and the graph depicting the model's ideal energy and performance benefits}
+
+
+
+\begin{table}[h]
+\footnotesize
+\def\arraystretch{0.52}
+\setlength{\tabcolsep}{.30em}
+\center
+\begin{tabular}{cccc} \toprule
+Application & Objective & CPU Freq. & DRAM Freq.  \\ \midrule
+Compute Intensive & Energy & Maintain & Decrease \\
+Compute Intensive & Performance & Increase & Maintain \\
+Cache Sensitive & Energy &  Decrease & Decrease \\ 
+Cache Sensitive & Performance &  Maintain & Increase \\ 
+Memory Intensive & Energy & Decrease & Maintain \\
+Memory Intensive & Performance & Maintain & Increase \\ \midrule
+
+\end{tabular}
+\caption{E-MOS Policy Decision Table}\label{tbl:emos-dec}
+\end{table}
+
+
