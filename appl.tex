@@ -30,7 +30,7 @@ and the accesses reach memory. Increasing CPU frequency for these applications c
 lead to wastage of energy. 
 \end{itemize}
 
-Figure~\ref{fig:appl-cat} shows the application categorization across 7 SPEC2006~\cite{spec2006} benchmarks, 5 SPLASH2~\cite{splash2} benchmarks and 2 micro-benchmarks. 
+Figure~\ref{fig:def-def} shows the application categorization across 7 SPEC2006~\cite{spec2006} benchmarks, 5 SPLASH2~\cite{splash2} benchmarks and 2 micro-benchmarks. 
 It is clear that SPEC2006 benchmarks are mostly compute intensive, 
 SPLASH2 workloads are Compute and cache sensitive, whereas the 2 micro-benchmarks 
 have lot of memory accesses.
@@ -43,7 +43,6 @@ have lot of memory accesses.
   \caption{Execution time for Linux Ondemand and Intel-Pstate power governors}
   \label{fig:def-perf}
 \end{figure*}
-
 
 Now, we analyzed these workloads with Linux "Ondemand" power governor and 2 power governors of recent Intel P-state driver~\cite{pstate}. Figure~\ref{fig:def-perf}
 shows the execution time of chosen workloads for the three power governors. It is seen that, even though each of the power governors
@@ -59,10 +58,6 @@ energy efficiency of these governors, we performed energy evaluation for all 3 a
   \label{fig:spec-energy}
 \end{figure}
 
-Figure~\ref{fig:spec-energy} shows the energy consumption in Joules for 3 of the SPEC 2006
-benchmarks and we see that the Core and Uncore energy for all 3 workloads with 3 different
-power governors are similar. 
-
 \begin{figure}
   \begin{center}
 \includegraphics[width=\linewidth]{figs/def-drivers-splash-crop.pdf}
@@ -73,12 +68,7 @@ power governors are similar.
 \end{figure}
 
 
-Figure~\ref{fig:splash-energy} shows similar trend for SPLASH benchmarks,
-but for all 3 workloads it is seen that with Psate powersave governors we get some energy benefits.
-This slight benefit is because of some memory access these benchmarks have and powersave governor
-gains energy benefits by reducing the CPU frequency to minimum. 
-
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
 \includegraphics[width=\linewidth]{figs/def-drivers-micro-crop.pdf}
   \end{center}
@@ -87,6 +77,14 @@ gains energy benefits by reducing the CPU frequency to minimum.
 	\label{fig:micro-energy}
 \end{figure}
 
+
+Figure~\ref{fig:spec-energy} shows the energy consumption in Joules for 3 of the SPEC 2006
+benchmarks and we see that the Core and Uncore energy for all 3 workloads with 3 different
+power governors are similar. 
+Figure~\ref{fig:splash-energy} shows similar trend for SPLASH benchmarks,
+but for all 3 workloads it is seen that with Psate powersave governors we get some energy benefits.
+This slight benefit is because of some memory access these benchmarks have and powersave governor
+gains energy benefits by reducing the CPU frequency to minimum. 
 Figure~\ref{fig:micro-energy} shows
 the energy consumption for 2 of the memory bound micro-benchmarks and again similar trend is seen
 for all the 3 governors.
