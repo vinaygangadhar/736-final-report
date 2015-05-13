@@ -30,10 +30,12 @@ We use this information to make power management decisions for these classified 
 \paragraph{Application Profiling and decomposition} Dynamic voltage and frequency scaling based on application profiling and 
 decomposition has been done in Choi. et. al~\cite{decomp}. This idea on profiling is similar to our project’s initial profiling step, but the workload 
 is decomposed into two-parts here: On-chip and Off-chip, effectively indicating CPU sensitive and memory sensitive applications respectively. 
-It exploits on the idea that different workloads have different power management needs and this statistics could be exploited by the performance 
-monitoring unit (PMU) at run-time. They do not implement this in operating system and  overall energy management policy has to still go through kernel 
-and the kernel may decide to override the policy based on its decisions. Similarly, Choi et. al~\cite{choi2005fine} work does DVFS for energy conservation 
+It exploits the idea that different workloads have different power management needs and these statistics could be exploited 
+at run-time. They do not implement this in operating system and the energy management policy  
+may be overriden by the kernel's own policies. Similarly, Choi et. al~\cite{choi2005fine} work does DVFS for energy conservation 
 classifying all the applications based on On-chip and Off-Chip computation ratio. Again this would result in a generic decision, based on ratios calculated offline. 
 Power conscious fixed scheduling policy of applications with DVFS based on profiling information has been implemented in Shin et. al~\cite{shin1999power}, 
-which again does not integrate the decision making capability to operating systems. Our project aims at embedding this application information 
-into energy management decision making policy of operating system kernel and does this based on application needs. 
+which again does not integrate the decision making capability to operating systems. 
+Snowdon et. al~\cite{snowdon2009koala} also characterize applications but use this information to estimate an application's power consumption. 
+They use this information to present the OS with a flexible power management policy and, unlike the other work in this paragraph, implement Koala in Linux.
+Similar to Koala, our project aims at embedding application information into the energy management policy of the operating system, based on an application's needs. 
