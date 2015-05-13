@@ -3,7 +3,7 @@
 The last decade of computing has seen mobile phones, wearables and other battery powered systems becoming 
 more ubiquitous. This shift towards mobile computing has lead to system designers being faced with the  
 challenge of prolonging battery life by limiting the energy consumed  
-by system resources (CPU, Memory, Network) and improving system energy effeciency ~\cite{martin-bat, worldwide} while running a multitude of user applications. 
+by system resources (CPU, Memory, Network) and improving system energy efficiency ~\cite{martin-bat, worldwide} while running a multitude of user applications. 
 In addition to energy consumption, managing system power dissipation is also very 
 important in avoiding heat related problems that are prevalent in computing systems~\cite{hybdtm}.
 
@@ -14,9 +14,9 @@ using DVFS (Dynamic voltage frequency scaling)~\cite{dvfs} to reduce the CPU ope
 Reflecting this, the current power management governors in Linux primarily use one source of 
 information while regulating power, the CPU usage and system performance requirements. 
 Based on the performance needs of a system, these governors vary the CPU frequency in an effort to manage energy consumption while maintaining QoS. 
-There exists a wide variety of other source of information, through platfrom independent interfaces like ACPI~\cite{acpi, freqgov}, platfrom dependent interfaces like RAPL 
+There exists a wide variety of other source of information, through platform independent interfaces like ACPI~\cite{acpi, freqgov}, platform dependent interfaces like RAPL 
 and the user as well. The rigid nature of current power management policies could harm the energy efficiency of a system since applications could differ in their needs, and thus 
-require different stratergies to achieve efficient power usage. 
+require different strategies to achieve efficient power usage. 
 Some applications (such as those that interact with the user) run for short periods of time and require an immediate response. Other, more background tasks (like a disk scan) run for longer durations 
 but might not be as latency bound.
 While the former class of applications could benefit from short periods of high performance, the latter could be executed more efficiently by operating at a lower performance level. 
@@ -45,17 +45,10 @@ This paper makes the following contributions:
 We first discuss related work in the power management field in Section ($\S$\ref{sec:rel}). 
 We present a brief overview of the existing Linux power management solutions in Section ($\S$\ref{sec:linux-powergov}). 
 Section ($\S$\ref{sec:case-study}) discusses a case-study of non-linear scaling with existing power governors and motivates our work.
-Section ($\S$\ref{sec:appl}) explains the application profiling and categorization methodology that we use and the results of this profiling. 
-We also evaluate the performance of the existing power governors in this section and go into some of their problems. Section ($\S$\ref{sec:analytic}) explains
-our E-MOS analytical model and the decision table it uses to make power management decisions. Section ($\S$\ref{sec:meth}) details our experimental methodology 
-while Section ($\S$\ref{sec:results}) gives a detailed evaluation of our model. We discuss the
-lessons we learnt in Section ($\S$\ref{sec:disc}) and finally conclude in Section ($\S$\ref{sec:conc}).
+Section ($\S$\ref{sec:appl}) explains the application categorization and reason out the 
+problems with existing Linux governors. 
+Section ($\S$\ref{sec:analytic}) explains
+our E-MOS analytical model and the decision table it uses to make application-aware energy management policy decisions. Section ($\S$\ref{sec:meth}) details our experimental methodology 
+while Section ($\S$\ref{sec:results}) gives a detailed evaluation and results of our model. We discuss the
+lessons we learned in Section ($\S$\ref{sec:disc}) and finally conclude in Section ($\S$\ref{sec:conc}).
 
-
-\begin{comment}
-
-This is the old second paragraph, which I've rewritten.
-
-Linux OS provide ACPI~\cite{acpi, freqgov} interfaces to extract information about batteries and other resources, but the power governors don't utilize this information efficiently to make proper energy management decisions. Current policies generally rely on user-specified static parameters to run at a specific lower CPU frequency or lower system power state without considering the applications’ requirements. Many multi-core processors try to improve the applications execution time by running at higher frequencies and thus consume more power (May consume less energy, if the execution time is small). Some applications have more memory accesses, in which case running at higher frequencies always is not beneficial. Many applications are long running jobs which consume lot of energy if run at higher frequency. All these above scenarios suggest that there is ‘NO’ one-size fit all solution for better system energy efficiency. Thus, Linux power governors need more application information, to determine whether to boost the performance or run at lower-power state by continuously monitoring the available battery resource. Our project aims to solve this problem of energy management decision by deriving some of the principles from Liang et. al~\cite{and-dvfs} implemented for Android systems.
-
-\end{comment}
