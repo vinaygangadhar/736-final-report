@@ -17,13 +17,13 @@ on system load and ACPI events and request CPU frequencies. On the other hand, I
 The P-state drivers are more aware of the hardware capabilities of Intel's processors and request Performance states (P-states) rather than fixed frequencies.
 
 \paragraph{ACPI governors}
-These governors attempt to scale the CPU frequency in order to save power. CPU frequencies can be scaled automatically 
-depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform 
+These governors attempt to scale CPU frequency in order to save power. CPU frequencies can be scaled automatically 
+depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in the Linux kernel to perform 
 frequency scaling is called \emph{cpupower}.  
 
 There are a number of ACPI governors available in Linux but the ondemand governor is the most widely used.
 This governor sets the CPU frequency depending on the system load.  
-In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the Ondemand governor will slowly 
+In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the ondemand governor will slowly 
 step back down through the kernel's frequency steppings until it settles at the lowest possible frequency, or the user executes another task to demand a ramp.
 Ondemand scales its frequency in a work queue context. In other words, once the task that triggered the frequency ramp is finished, 
 ondemand will attempt to move the frequency back to minimum. If the user executes another task that triggers ondemand's ramp, the frequency will bounce from minimum to maximum.
