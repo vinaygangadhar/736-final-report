@@ -19,7 +19,7 @@ These governors attempt to scale the CPU frequency in order to save power. CPU f
 depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform 
 frequency scaling is called \emph{cpupower}.  
 
-There are a number of ACPI governors available in Linux but the On demand governor is the most widely used.
+There are a number of ACPI governors available in Linux but the Ondemand governor is the most widely used.
 This governor sets the CPU frequency depending on the system load.  
 In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the Ondemand governor will slowly 
 step back down through the kernel's frequency steppings until it settles at the lowest possible frequency, or the user executes another task to demand a ramp.
@@ -31,7 +31,7 @@ Intel's P-state drivers work on the race-to-idle concept. Since most modern CPUs
 as possible and return the CPU to an idle state. Race-to-idle policies benefit from the power savings of having the CPU in an idle state for most of the time. Apart from 
 exploiting the idle CPU power savings, the P-state drivers are also aware of the available Performance states (or P-states), which represent a voltage-frequency operating point for the CPU. 
 Currently, two P-state driver algorithms are selectable by the user: powersave and performance. As their names imply, the powersave driver emphasizes power savings at the cost of 
-performance while the Performance driver works in a manner that is similar to the ACPI On demand governor.
+performance while the Performance driver works in a manner that is similar to the ACPI Ondemand governor.
  
 \begin{comment}
 \subsection{Performance}

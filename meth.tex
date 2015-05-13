@@ -7,16 +7,68 @@ Evaluation will be done by determining the performance and energy for all the ap
 Finally, we will compare it with runs on standard Linux platform. 
 \fi
 
-All tests were executed on a Lenovo Y500, fitted with an Intel core i7 3630 and running 32-bit Ubuntu 15.04 with Linux kernel 3.19. All power/energy measurements were made in terminal mode to reduce the added noise of the desktop environment. A number of system power measurement methods were examined while working on this project, including: a watt meter, PowerTOP, PowerStat and perf. After testing and comparing each of these methods, we decided to use perf, since it provided us with the best (and most repeatable) estimate of the energy consumed by an application. The watt meter provided us with the instantaneous power consumed by the system but we found this to be too coarse and were limited to a sampling time of 1 second. The low sampling rate and coarse grained measurements ruled out the watt meter. Powerstat reads system files related to the battery discharge rate and provides an estimate of power consumption. While powerstat is useful, it would have limited us to running all benchmarks on the battery, which would have been time consuming due to the need for multiple battery recharges. We were also suspicious of the accuracy of the tools readings.
+All tests were executed on an Intel core i7 3630, running 32-bit Ubuntu 15.04 with Linux kernel 3.19. 
+All power/energy measurements were made in terminal mode to reduce the added noise of the desktop environment. 
+A number of system power measurement methods were examined while working on this project, including: a watt 
+meter, \texttt{PowerTOP}, \texttt{PowerStat} and \texttt{perf}. After testing and comparing each of these methods, we decided to use \texttt{perf}, 
+since it provided us with the best (and most repeatable) estimate of the energy consumed by an application. 
 
-PowerTOP was looked at next and also needs the system to run on a battery to estimate energy consumption. Unlike Powerstat, PowerTOP was designed to use Intel’s RAPL (Running Average Power Limit) interface giving it a theoretical advantage in terms of accuracy and repeatability. RAPL was designed by Intel to manage the thermals of a processor, i.e. ensure that their chips run within the thermal limits. It does so by reading a few Machine Specific Registers and using a software power model to estimate power and energy. The RAPL interface was released with Linux 3.13. Using RAPL, estimates of energy consumed by the cores as well as the package energy (package energy includes the core energy consumption as well as the cache numbers) can be obtained. Intel have conducted tests~\cite{rotem2012power} that validate the accuracy of the RAPL estimates. Despite the advantages of PowerTOP, it had to be dropped due to the battery requirements as well as a long calibration phase that consists of completing about 270 power measurements before the tool reported power.
-
-This leads to perf, our selected energy consumption measurement tool. Similar to PowerTOP, perf also uses RAPL to estimate the energy consumed by an application.
-There is an inherent issue with RAPL since it uses 32-bit counters that do not generate an interrupt on overflow. Perf handles this by gathering multiple periodic samples and using 64-bit counters that are updated in sync with the RAPL counters. While perf handles the counter overflow issues, it’s counters are incremented in steps of 0.23 nJ and this requires the final values to be scaled. The perf stat tool handles this scaling at the cost of a few extra clock cycles due to the additional floating point arithmetic. perf allowed us to measure the energy consumed by the cores and the cache.
-We measured the energy consumed by a benchmark by using perf stat and the baseline energy consumption was measured by calling the RAPL interface and executing the Linux usleep() function for durations equal to the execution time of the benchmark. All our energy numbers were obtained by executing a benchmark and measuring the corresponding system energy for 10 iterations. The lowest measured values were then used in our analysis.
+\paragraph{}\texttt{perf} uses Intel's RAPL (Running Average Power Limit) to estimate the energy consumed by an application. 
+RAPL was designed by Intel to manage the thermals of a processor, i.e. ensure that their chips run within the thermal limits. It does so by reading a 
+few Machine Specific Registers (MSRs) and using a software power model to estimate power and energy. The RAPL interface 
+was released with Linux 3.13. Using RAPL, estimates of energy consumed by the cores as well as the package energy 
+(package energy includes the core energy consumption as well as the cache numbers) can be obtained. Intel have 
+conducted tests~\cite{rotem2012power} that validate the accuracy of the RAPL estimates.
+There is an inherent issue with RAPL since it uses 32-bit counters that do not generate an interrupt on overflow. 
+Perf handles this by gathering multiple periodic samples and using 64-bit counters that are updated in sync with 
+the RAPL counters. While \texttt{perf} handles the counter overflow issues, it’s counters are incremented in steps of 0.23 nJ 
+and this requires the final values to be scaled. The \texttt{perf} stat tool handles this scaling at the cost of a few extra 
+clock cycles due to the additional floating point arithmetic. \texttt{perf} allowed us to measure the energy consumed by the cores and the cache.
+We measured the energy consumed by a benchmark by using \texttt{perf} stat and the baseline energy consumption was measured 
+by calling the RAPL interface and executing the Linux \texttt{usleep} function for durations equal to the execution time 
+of the benchmark. All our energy numbers were obtained by executing a benchmark and measuring the corresponding 
+system energy for 10 iterations. The lowest measured values were then used in our analysis.
 
 
 \paragraph{Limitations}
- The perf energy consumption numbers that we collected for the cores are measured for the entire power plane. Therefore, even though benchmarks could run on a single core, our numbers are for all cores. We have attempted to reduce the impact of this by measuring the baseline energy consumption.
+ The \texttt{perf} energy consumption numbers that we collected for the cores are measured for the entire power plane. 
+Therefore, even though benchmarks could run on a single core, our numbers are for all cores. We have attempted to 
+reduce the impact of this by measuring the baseline energy consumption.
   
+\begin{comment}
+All tests were executed on an Intel core i7 3630, running 32-bit Ubuntu 15.04 with Linux kernel 3.19. 
+All power/energy measurements were made in terminal mode to reduce the added noise of the desktop environment. 
+A number of system power measurement methods were examined while working on this project, including: a watt 
+meter, PowerTOP, PowerStat and perf. After testing and comparing each of these methods, we decided to use perf, 
+since it provided us with the best (and most repeatable) estimate of the energy consumed by an application. 
+The watt meter provided us with the instantaneous power consumed by the system but we found this to be too coarse 
+and were limited to a sampling time of 1 second. The low sampling rate and coarse grained measurements ruled out 
+the watt meter. Powerstat reads system files related to the battery discharge rate and provides an estimate of 
+power consumption. While powerstat is useful, it would have limited us to running all benchmarks on the battery, 
+which would have been time consuming due to the need for multiple battery recharges. We were also suspicious of 
+the accuracy of the tools readings.
 
+PowerTOP was looked at next and also needs the system to run on a battery to estimate energy consumption. 
+Unlike Powerstat, PowerTOP was designed to use Intel’s RAPL (Running Average Power Limit) interface giving it 
+a theoretical advantage in terms of accuracy and repeatability. RAPL was designed by Intel to manage the 
+thermals of a processor, i.e. ensure that their chips run within the thermal limits. It does so by reading a 
+few Machine Specific Registers and using a software power model to estimate power and energy. The RAPL interface 
+was released with Linux 3.13. Using RAPL, estimates of energy consumed by the cores as well as the package energy 
+(package energy includes the core energy consumption as well as the cache numbers) can be obtained. Intel have 
+conducted tests~\cite{rotem2012power} that validate the accuracy of the RAPL estimates. Despite the advantages of 
+PowerTOP, it had to be dropped due to the battery requirements as well as a long calibration phase that consists 
+of completing about 270 power measurements before the tool reported power.
+
+This leads to perf, our selected energy consumption measurement tool. Similar to PowerTOP, perf also uses RAPL 
+to estimate the energy consumed by an application.
+There is an inherent issue with RAPL since it uses 32-bit counters that do not generate an interrupt on overflow. 
+Perf handles this by gathering multiple periodic samples and using 64-bit counters that are updated in sync with 
+the RAPL counters. While perf handles the counter overflow issues, it’s counters are incremented in steps of 0.23 nJ 
+and this requires the final values to be scaled. The perf stat tool handles this scaling at the cost of a few extra 
+clock cycles due to the additional floating point arithmetic. perf allowed us to measure the energy consumed by the cores and the cache.
+We measured the energy consumed by a benchmark by using perf stat and the baseline energy consumption was measured 
+by calling the RAPL interface and executing the Linux usleep() function for durations equal to the execution time 
+of the benchmark. All our energy numbers were obtained by executing a benchmark and measuring the corresponding 
+system energy for 10 iterations. The lowest measured values were then used in our analysis.
+
+\end{comment}
