@@ -9,11 +9,31 @@
 	\label{fig:gov}
 \end{figure}
 
+On today's Linux systems, depending on hardware availability and the version of the Linux kernel used in a distribution, power management 
+is either handled by the ACPI governors or Intel's P-state drivers. The ACPI governors are platform independent solutions that base their decisions 
+on system load and ACPI events and request CPU frequencies. On the other hand, Intel's P-state drivers were introduced in Linux 3.9 and support processors from Sandybridge onwards. 
+The P-state drivers are more aware of the hardware capabilities of Intel's processors and request Performance states (P-states) rather than fixed frequencies.
 
+\paragraph{ACPI governors}
+These governors attempt to scale the CPU frequency in order to save power. CPU frequencies can be scaled automatically 
+depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform 
+frequency scaling is called \emph{cpupower}.  
 
-CPU frequency scaling enables the operating system to scale the CPU frequency up or down in order to save power. CPU frequencies can be scaled automatically depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform frequency scaling is called \emph{cpufreq}. Most cpufreq drivers or even most cpu frequency scaling algorithms only offer the CPU to be set to one frequency. In order to offer dynamic frequency scaling, the cpufreq governor must be able to tell these drivers of a "target frequency". Similar to \emph{cpufreq}, recently linux power governors can be monitored using \emph{cpumonitor} utility which gives the running frequency information as well as performance statistics under that governor.
+There are a number of ACPI governors available in Linux but the On demand governor is the most widely used.
+This governor sets the CPU frequency depending on the system load.  
+In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the Ondemand governor will slowly 
+step back down through the kernel's frequency steppings until it settles at the lowest possible frequency, or the user executes another task to demand a ramp.
+Ondemand scales its frequency in a work queue context. In other words, once the task that triggered the frequency ramp is finished, 
+OnDemand will attempt to move the frequency back to minimum. If the user executes another task that triggers OnDemand's ramp, the frequency will bounce from minimum to maximum.
 
-There are various power governors available in Linux. Some of the most popular ones are listed below:
+\paragraph{P-state drivers}
+Intel's P-state drivers work on the race-to-idle concept. Since most modern CPUs consume very little power when idle, these drivers attempt to execute workloads as quickly 
+as possible and return the CPU to an idle state. Race-to-idle policies benefit from the power savings of having the CPU in an idle state for most of the time. Apart from 
+exploiting the idle CPU power savings, the P-state drivers are also aware of the available Performance states (or P-states), which represent a voltage-frequency operating point for the CPU. 
+Currently, two P-state driver algorithms are selectable by the user: powersave and performance. As their names imply, the powersave driver emphasizes power savings at the cost of 
+performance while the Performance driver works in a manner that is similar to the ACPI On demand governor.
+ 
+\begin{comment}
 \subsection{Performance}
 This governor sets the CPU statically to a maximum frequency. This governor comes in handy in today’s phones, which implement a faster race to idle. Race-to-idle is the process by which a phone completes a given task, such as syncing email, and returns the CPU to the extremely efficient low-power state. This governor however, relies on a kernel that properly implements low power CPU C states.
 
@@ -38,5 +58,4 @@ This governor as the name suggests only makes use of minimum and maximum frequen
 \subsection{Interactive}
 Much like the OnDemand governor, the Interactive governor dynamically scales CPU frequency in response to the workload placed on the CPU by the user. However, this governor is significantly more responsive than OnDemand, because it's faster at scaling to maximum frequency.
 Unlike Ondemand governor, which scales clockspeed in the context of a work queue, Interactive governor scales the clockspeed over the course of a timer set arbitrarily by the kernel. In other words, if an application demands a ramp to maximum frequency by placing 100\% load on the CPU, an user can execute another task before the governor starts reducing CPU frequency. The timer also renders this governor better suitable to utilize intermediate frequencies.
-
-\fixme{Need to include the Intel P-State Drivers information here}
+\end{comment}
