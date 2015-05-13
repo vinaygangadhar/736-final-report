@@ -1,5 +1,16 @@
 \section{Linux Power Governors}\label{sec:linux-powergov}
 
+\begin{figure}[h]
+  \begin{center}
+\includegraphics[width=\linewidth]{figs/gov-crop.pdf}
+  \end{center}
+  \vspace{-0.1in}
+  \caption{Freq reduced by 30\%}
+	\label{fig:gov}
+\end{figure}
+
+
+
 CPU frequency scaling enables the operating system to scale the CPU frequency up or down in order to save power. CPU frequencies can be scaled automatically depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform frequency scaling is called \emph{cpufreq}. Most cpufreq drivers or even most cpu frequency scaling algorithms only offer the CPU to be set to one frequency. In order to offer dynamic frequency scaling, the cpufreq governor must be able to tell these drivers of a "target frequency". Similar to \emph{cpufreq}, recently linux power governors can be monitored using \emph{cpumonitor} utility which gives the running frequency information as well as performance statistics under that governor.
 
 There are various power governors available in Linux. Some of the most popular ones are listed below:
