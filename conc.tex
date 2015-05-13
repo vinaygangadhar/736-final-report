@@ -1,1 +1,11 @@
 \section{Conclusion}\label{sec:conc}
+Through this project, we aimed to prove that energy efficient power decisions can be made by taking application 
+characteristics into account. While our implementation is limited to a static analysis of workloads, our results show that 
+this idea does have merit. This concept can be extended to a dynamic implementation by using performance counters and 
+libraries like PAPI and interfaces like RAPL continue to make this more accessible. 
+\paragraph{}We implemented an analytical model, E-MOS, that can be fed application characteristics and system power requirements 
+and would suggest an optimum CPU frequency. E-MOS was designed to balance performance and energy consumption and our 
+results show that we can achieve up to 2x energy efficiency with a performance loss of 13\%. Considering that our data 
+does not include Intel's turbo frequency boost, there is some room for performance improvements as well.
+Overall, a userspace power governor implementation that takes these application features into account has the potential to 
+be more energy efficient than current defaults like the ondemand governor, even if it means a small loss in performance.
