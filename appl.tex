@@ -1,15 +1,6 @@
 \section{Power Governors Analysis}\label{sec:appl}
 
-\begin{figure*}[htp]
-  \begin{center}
-\includegraphics[width=\linewidth]{figs/app-cat-crop.pdf}
-  \end{center}
-  \vspace{-0.1in}
-  \caption{Distribution of Instructions in Applications}
-  \label{fig:app-cat}
-\end{figure*}
-
-\begin{figure*}[htp]
+\begin{figure*}[h]
   \begin{center}
 \includegraphics[width=\linewidth]{figs/def-exec-time-crop.pdf}
   \end{center}
@@ -75,6 +66,7 @@ The micro-benchmark MM has lot of cache related instructions and many accessing 
 ML2 has zero cache access and all of the load/store  instructions access the memory.
 
 \subsection{Power governors performance}
+
 We executed these applications on a Linux kernel with Ondemand~\cite{ondemand2006} power governor
 as the default and also ran the applications on two power governors (performance and powersave) 
 of Intel's recent P-state~\cite{pstate, rotem2012power} driver \footnote{
