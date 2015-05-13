@@ -1,12 +1,12 @@
-\section{Lessons learnt}\label{sec:disc}
+\section{Lessons learned}\label{sec:disc}
 
 Power management is still a challenge but, based on the evolution of tools and interfaces that we've explored 
-over the course of working on this project, the tools needed to create a more effecient power management system 
+over the course of working on this project, the tools needed to create a more efficient power management system 
 are improving all the time. With RAPL (on Intel's processors at least) and libraries like PAPI, accurate power 
 estimation is now much simpler. Our implementation can be extended to work with real time, interactive applications 
 by using the CPU's performance counters with RAPL's power estimates.
 
-\paragraph{}Speaking of interactive applications, it became apparent to us that perfromance benchmarks might not be the best method  
+\paragraph{}Speaking of interactive applications, it became apparent to us that performance benchmarks might not be the best method  
 of evaluating a power management policy, based on our tests. The performance centric nature of benchmarks like SPEC 
 are good workloads for power management policies and, as can be seen from our comparisons, might not be the best way 
 of differentiating any potential improvements,

@@ -1,25 +1,30 @@
 \begin{abstract} \vspace{0.05in}
 
-Power management in Linux is either handled by static, fixed policy power governors or Intel's P-state drivers. 
+Current Linux Operating Systems' power governors do not provide a fine-grained control and management 
+over the energy utilized by the applications running on a computing system. 
+Linux power governors by default use "ondemand" CPU frequency governor or Intel's P-state drivers for 
+power management by considering the entire system load rather than individual application requirements. 
 The former was designed to manage CPU idle states and scales frequency to do so while the latter was designed 
-with the race-to-idle (or race-to-sleep) concept. Both of these solutions manage system power by changing the 
-performance state of the CPU but they take a more holistic view of the system that could miss some of the nuances  
-present in the active applications.
+with the race-to-idle (or race-to-sleep) concept.  
+This system-wide and default kernel policy could have undesirable effects of OS power management 
+and could lead to poor battery life and performance, 
+at least for modern CPUs.
+%
 
 %Linux power governors operate on a generic energy management policy,
 %based on the assumption that reducing frequency of CPU (using DVFS) or 
 %putting the system to low-power state would reduce the system energy always,
 %without having necessary information about the application. 
-In this project, we explore the opportunities that application characterization presents for more efficient power management 
-and provide an overview of the difficulties in Linux power management. 
+In this project, we explore the opportunities that application characterization presents for more efficient energy management 
+solutions and we provide an overview of the difficulties in Linux Operating System power management. 
 
 We present E-MOS (Efficient Energy Management Policies in Operating Systems),
 a power management model which uses applications characteristics (CPU/memory bound and cache sensitivity) to 
-make frequency scaling decisions in order to achieve better energy efficiency while balancing the performance and energy requirements of a system. 
+make frequency scaling policy decisions in order to achieve better energy efficiency while balancing the performance of the system. 
 The decisions of this application aware policy 
-can be applied through the ACPI (Advanced Configuration and Power Interface) userspace power governor. 
+can be applied through the ACPI (Advanced Configuration and Power Interface) user-space power governor. 
 E-MOS is evaluated on variety of benchmarks and we see energy savings 
-up to 2x for a 13\% performance loss.
+upto 2x for a 13\% performance loss.
 
 
 

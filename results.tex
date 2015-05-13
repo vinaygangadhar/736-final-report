@@ -49,7 +49,7 @@ is a good indication. You can still boost the application till turbo boost capab
 but you will lose lot of energy gains and so did E-MOS not choose setting
 above 2.4Ghz as the power factor effects more to energy than the lower execution time.
 With lower frequency of 1.8Ghz, you gain upto 1.6Ghz energy efficiency with performance loss
-of 15\%. You might want to go to lower frequency settings when energy is atmost important with situations like
+of 15\%. You might want to go to lower frequency settings when energy is at-most important with situations like
 low battery in mobile phones.
 
 \subsection{Cache sensitive workloads}
@@ -66,20 +66,26 @@ With one setting lower, for 1.8Ghz you can gain energy efficiency upto 1.62x and
 We believe for cache workloads 2.1Ghz is good, as modern processors are equipped with
 prefect hing and out of order execution mechanisms which hides the cache latency effectively and thus 
 want to be executing at slightly higher frequency than 1.8Ghz.
-This result was interestinng as we expected E-MOS to still choose a lower setting, but we 
+This result was interesting as we expected E-MOS to still choose a lower setting, but we 
 got around 1.5x energy efficiency with a higher setting.
 
 \subsection{Memory intensive workloads}
 Figure~\ref{fig:user-micro} shows the relative energy efficiency and speedup
-for SPEC2006 benchmarks which are mainly compute intensive workloads. 
-E-MOS chose a frequency setting of 1.8Ghz to 2.4Ghz for best energy efficiency
-among the available scalable frequency set. The geometric mean for 2.4Ghz indicates  
-upto 1.4x of energy efficiency with just 3\% performance loss. Provided 
-E-MOS was optimized for energy savings, 3\% performance loss with such significant energy gains
-is a good indication. You can still boost the application till turbo boost capability
-but you will lose lot of energy gains and so did E-MOS not choose setting
-above 2.4Ghz as the power factor effects more to energy than the lower execution time.
-With lower frequency of 1.8Ghz, you gain upto 1.6Ghz energy efficiency with performance loss
-of 15\%. You might want to go to lower frequency settings when energy is atmost important with situations like
-low battery in mobile phones.
+for micro-benchmark suite MICRO-BENCH which are memory intensive workloads. 
+E-MOS chose a frequency setting of 1.2Ghz to 1.8Ghz for best energy efficiency
+among the available scalable frequency set. The geometric mean for 1.2Ghz indicates  
+upto 2x of energy efficiency with  13\% performance loss. 
+it is interesting to see that even with the frequency increase to 1.8Ghz, there is no significant 
+increase in performance for these workloads. So, it is better to run these applications
+at lower frequency with half the energy (2x energy efficient) what you need for ondemand power governor.
+You would see performance increasing if you have capability to increase the DRAM frequency. However,
+in that case, you have to get the energy estimates of the entire system, which includes core, uncore and DRAM.
 
+Overall, E-MOS analytical model with user-space power governor provided a good scalable frequency setting for all three type of application
+with better energy efficiency compared to ondemand power governor. The results backed 
+our intuition that application-aware energy management is better and it makes
+sense for OS to give onus to user-space to make more better policy decisions.
+However, with more community support and integrating E-MOS type application-aware  models into 
+existing power governors could lead to better energy management solutions in OS. It was a small step
+from out project towards achieving this goal of energy efficient computing and with tools getting better
+we can expect to see more energy efficient solutions in coming days.
