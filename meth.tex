@@ -22,9 +22,9 @@ conducted tests~\cite{rotem2012power} that validate the accuracy of the RAPL est
 There is an inherent issue with RAPL since it uses 32-bit counters that do not generate an interrupt on overflow. 
 Perf handles this by gathering multiple periodic samples and using 64-bit counters that are updated in sync with 
 the RAPL counters. While \texttt{perf} handles the counter overflow issues, it’s counters are incremented in steps of 0.23 nJ 
-and this requires the final values to be scaled. The \texttt{perf} stat tool handles this scaling at the cost of a few extra 
+and this requires the final values to be scaled. The \texttt{perf stat} tool handles this scaling at the cost of a few extra 
 clock cycles due to the additional floating point arithmetic. \texttt{perf} allowed us to measure the energy consumed by the cores and the cache.
-We measured the energy consumed by a benchmark by using \texttt{perf} stat and the baseline energy consumption was measured 
+We measured the energy consumed by a benchmark by using \texttt{perf stat} and the baseline energy consumption was measured 
 by calling the RAPL interface and executing the Linux \texttt{usleep} function for durations equal to the execution time 
 of the benchmark. All our energy numbers were obtained by executing a benchmark and measuring the corresponding 
 system energy for 10 iterations. The lowest measured values were then used in our analysis.
