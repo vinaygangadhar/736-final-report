@@ -21,12 +21,12 @@ These governors attempt to scale the CPU frequency in order to save power. CPU f
 depending on the system load, in response to ACPI events, or manually by user space programs. The infrastructure available in Linux kernel to perform 
 frequency scaling is called \emph{cpupower}.  
 
-There are a number of ACPI governors available in Linux but the Ondemand governor is the most widely used.
+There are a number of ACPI governors available in Linux but the ondemand governor is the most widely used.
 This governor sets the CPU frequency depending on the system load.  
 In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the Ondemand governor will slowly 
 step back down through the kernel's frequency steppings until it settles at the lowest possible frequency, or the user executes another task to demand a ramp.
 Ondemand scales its frequency in a work queue context. In other words, once the task that triggered the frequency ramp is finished, 
-OnDemand will attempt to move the frequency back to minimum. If the user executes another task that triggers OnDemand's ramp, the frequency will bounce from minimum to maximum.
+ondemand will attempt to move the frequency back to minimum. If the user executes another task that triggers ondemand's ramp, the frequency will bounce from minimum to maximum.
 
 \paragraph{P-state drivers}
 Intel's P-state drivers work on the race-to-idle concept. Since most modern CPUs consume very little power when idle, these drivers attempt to execute workloads as quickly 
@@ -47,17 +47,17 @@ This governor allows the user or any user space program running with UID “root
 
 \subsection{On Demand}
 This governor sets the CPU frequency depending on the current usage. To do this the CPU must have the capability to switch between frequencies very quickly. In general, this governor tries to run the CPU load at high frequency. If the CPU load placed by the user abates, the Ondemand governor will slowly step back down through the kernel's frequency steppings until it settles at the lowest possible frequency, or the user executes another task to demand a ramp.
-Ondemand scales its frequency in a work queue context. In other words, once the task that triggered the frequency ramp is finished, OnDemand will attempt to move the frequency back to minimum. If the user executes another task that triggers OnDemand's ramp, the frequency will bounce from minimum to maximum.
+Ondemand scales its frequency in a work queue context. In other words, once the task that triggered the frequency ramp is finished, ondemand will attempt to move the frequency back to minimum. If the user executes another task that triggers ondemand's ramp, the frequency will bounce from minimum to maximum.
 This governor provides tunable parameters like sampling rate, the rate at which governor takes a look at CPU usage and makes a decision about frequency and sampling down factor, the rate at which the governor makes a decision on when to decrease the frequency while running at top speed
 
 \subsection{Conservative}
-This governor much like the ondemand governor, sets the CPU depending on the current usage.  It differs in behaviour in that it gracefully increases and decreases the CPU speed rather than jumping to maximum speed the moment there is any load on the CPU. This behaviour is more suitable in a battery powered environment.
-This governor provides tunable parameters like frequency steps, which describes what percentage steps the cpu freq should be increased and decreased smoothly by.
+This governor much like the ondemand governor, sets the CPU depending on the current usage.  It differs in behavior in that it gracefully increases and decreases the CPU speed rather than jumping to maximum speed the moment there is any load on the CPU. This behavior is more suitable in a battery powered environment.
+This governor provides tunable parameters like frequency steps, which describes what percentage steps the CPU freq should be increased and decreased smoothly by.
 
 \subsection{Min- Max}
 This governor as the name suggests only makes use of minimum and maximum frequencies depending upon the CPU load and does not use any intermediate frequencies.
 
 \subsection{Interactive}
-Much like the OnDemand governor, the Interactive governor dynamically scales CPU frequency in response to the workload placed on the CPU by the user. However, this governor is significantly more responsive than OnDemand, because it's faster at scaling to maximum frequency.
-Unlike Ondemand governor, which scales clockspeed in the context of a work queue, Interactive governor scales the clockspeed over the course of a timer set arbitrarily by the kernel. In other words, if an application demands a ramp to maximum frequency by placing 100\% load on the CPU, an user can execute another task before the governor starts reducing CPU frequency. The timer also renders this governor better suitable to utilize intermediate frequencies.
+Much like the ondemand governor, the Interactive governor dynamically scales CPU frequency in response to the workload placed on the CPU by the user. However, this governor is significantly more responsive than ondemand, because it's faster at scaling to maximum frequency.
+Unlike Ondemand governor, which scales clock speed in the context of a work queue, Interactive governor scales the clock speed over the course of a timer set arbitrarily by the kernel. In other words, if an application demands a ramp to maximum frequency by placing 100\% load on the CPU, an user can execute another task before the governor starts reducing CPU frequency. The timer also renders this governor better suitable to utilize intermediate frequencies.
 \end{comment}

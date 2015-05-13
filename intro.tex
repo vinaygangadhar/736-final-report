@@ -29,14 +29,14 @@ better energy efficiency is achievable. We first profile applications and charac
 Based on this information, an analytical model called E-MOS is used to reason about the frequency scaling of cores and achieve better energy efficiency. 
 The analytical model uses a decision table which is fed the parameters of an application and power management objectives to be achieved as inputs.
 It then computes possible actions that need to be taken to optimize energy efficiency.
-The model achieves a tradeoff between energy and performance by reducing, increasing or maintaining the CPU and DRAM frequency. 
+The model achieves a trade off between energy and performance by reducing, increasing or maintaining the CPU and DRAM frequency. 
 We evaluate the model's results by implementing its suggestions and testing with the Userspace power governor for a variety of applications. Our experiments only scale CPU frequency but we 
 observe X\% of energy savings with Y\% of performance loss compared to the default Linux power governors.
 
 This paper makes the following contributions:
 \begin{itemize}
 \item  An analysis and case study of existing Linux power governors for different applications that can be categorized as compute intensive, cache sensitive and memory bound. 
-\item  An application aware analytical model called E-MOS which analyzes the tradeoff between energy efficiency and performance with application information.
+\item  An application aware analytical model called E-MOS which analyzes the trade off between energy efficiency and performance with application information.
 \item  An improved energy-management policy, which tunes the CPU frequency to meet application demand while achieving better energy efficiency.
 \item  A comparison of E-MOS with Linux's default power governors for variety of benchmarks.
 \end{itemize}

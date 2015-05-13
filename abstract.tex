@@ -17,9 +17,9 @@ We present E-MOS (Efficient Energy Management Policies in Operating Systems),
 a power management model which uses applications characteristics (CPU/memory bound and cache sensitivity) to 
 make frequency scaling decisions in order to achieve better energy efficiency while balancing the performance and energy requirements of a system. 
 The decisions of this application aware policy 
-can be applied through the ACPI (Advanced Configuration and Power Interface) Userspace power governor. 
+can be applied through the ACPI (Advanced Configuration and Power Interface) userspace power governor. 
 E-MOS is evaluated on variety of benchmarks and we see energy savings 
-upto 2x for a 13\% performance loss.
+up to 2x for a 13\% performance loss.
 
 
 
@@ -33,7 +33,7 @@ Linux power governors by default use "Ondemand" CPU frequency governor for
 power management by considering the entire system load rather than individual application requirements. 
 This system-wide and default kernel policy could have undesirable effects of OS power management 
 and could lead to poor battery life and performance, 
-atleast for modern CPUs.
+at least for modern CPUs.
 %Linux power governors operate on a generic energy management policy,
 %based on the assumption that reducing frequency of CPU (using DVFS) or 
 %putting the system to low-power state would reduce the system energy always,
@@ -46,8 +46,8 @@ a model which uses pre-characterized information of applications, to
 make decisions of frequency scaling to achieve 
 better performance and energy efficiency. An application aware policy
 can be applied using Linux User-space power governors, to
-tradeoff performance and energy consumption. E-MOS is
+trade off performance and energy consumption. E-MOS is
 evaluated on variety of benchmarks and we see energy savings 
-upto X\% for a Y\% performance loss.
+up to X\% for a Y\% performance loss.
 
 \end{comment}
