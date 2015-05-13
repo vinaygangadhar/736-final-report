@@ -1,61 +1,55 @@
 \section{Introduction}\label{sec:intro}\label{sec:motiv}
 
-Modern multi-core computing systems (Laptops and hand-held devices) have major 
-challenges of limiting the energy consumed by the system resources (CPU, Memory, Network) 
-when running multitude of applications. 
-Managing system power dissipation is very 
-important to avoid heating problems prevalent in computing systems~\cite{hybdtm}.
-Moreover, with recent trend of ubiquitous hand-held and embedded computing devices,
-energy efficiency is paramount to maximize battery life~\cite{martin-bat, worldwide}. 
+The last decade of computing has seen mobile phones, wearables and other battery powered systems becoming 
+more ubiquitous. This shift towards mobile computing has lead to system designers being faced with the  
+challenge of prolonging battery life by limiting the energy consumed  
+by system resources (CPU, Memory, Network) and improving system energy effeciency ~\cite{martin-bat, worldwide} while running a multitude of user applications. 
+In addition to energy consumption, managing system power dissipation is also very 
+important in avoiding heat related problems that are prevalent in computing systems~\cite{hybdtm}.
 
-Most of the work on energy conservation in operating systems mainly rely on techniques which 
-dynamically characterize power consumption and Quality of Service (QOS) 
-of applications and provide a policy for users by 
-using DVFS (Dynamic voltage frequency scaling)~\cite{dvfs} or lower-CPU power states~\cite{sleepscale, ecos}.
+Most of the existing work on system energy conservation rely on techniques that  
+dynamically characterize power consumption and the Quality of Service (QoS) requirements 
+of applications. Based on these parameters, systems implement power management policies by 
+using DVFS (Dynamic voltage frequency scaling)~\cite{dvfs} to reduce the CPU operating frequency or switching to lower-CPU power states~\cite{sleepscale, ecos} during periods of low activity.
 Reflecting this, the current power management governors in Linux primarily use one source of 
-information to regulate power usage, namely the CPU usage, 
-and based on this, aim for a fixed level of CPU usage by varying the 
-CPU frequency. But there exists a wide variety of other 
-source of information, either from ACPI~\cite{acpi, freqgov} interfaces, 
-or from the user. And the rigid nature of the current power 
-management strategy harms efficiency since 
-application differ strongly in their needs, and thus 
-differ in which strategies promote efficient power usage. 
-They range from those that run for short periods and would 
-benefit from short periods of high frequency, to those which 
-run for a long time but do relatively little total work, for 
-which a low frequency would be more efficient. 
-Furthermore, similar issues occur with the use of other resources, 
-and the usage of these resources also affects the optimal 
-power management strategy, even when only managing the CPU.
+information while regulating power, the CPU usage and system performance requirements. 
+Based on the performance needs of a system, these governors vary the CPU frequency in an effort to manage energy consumption while maintaining QoS. 
+There exists a wide variety of other source of information, through platfrom independent interfaces like ACPI~\cite{acpi, freqgov}, platfrom dependent interfaces like RAPL 
+and the user as well. The rigid nature of current power management policies could harm the energy efficiency of a system since applications could differ in their needs, and thus 
+require different stratergies to achieve efficient power usage. 
+Some applications (such as those that interact with the user) run for short periods of time and require an immediate response. Other, more background tasks (like a disk scan) run for longer durations 
+but might not be as latency bound.
+While the former class of applications could benefit from short periods of high performance, the latter could be executed more efficiently by operating at a lower performance level. 
+Furthermore, similar issues occur with other system resources and the efficient management of these resources also affect the optimal power management strategy. 
+These issues could affect systems that only manage power through CPU frequency scaling as well.
 
-Given the above issues, our aim is to consider the cases where the current power governors on Linux fail to yield a reasonable solution. Furthermore in parallel to the ideas of Liang et. al~\cite{and-dvfs} we aim to show that by providing further information characterizing the needs of particular applications, we can achieve better energy efficiency. We first profile the applications, and characterize them into different buckets of compute intensive, cache sensitive and memory intensive applications. Based on this information, an analytical model called E-MOS
-is developed, to reason out the frequency scaling of 
-cores and thus gain better energy efficiency. 
-The analytical model has a decision table which takes in different parameters of applications and objectives to be achieved as inputs.
-It then computes possible actions needed to be taken, which is optimized for energy efficiency.
-The model achieves tradeoff between energy and performance 
-by reducing/increasing or maintaining the core frequency, DRAM frequency. We evaluate our model implemented
-with User-space power governor for variety of applications and we observe X\% of energy savings
-with Y\% of performance loss compared to default linux Ondemand power governors.
+Given the issues identified in the preceding paragraph, we aim to explore cases where the current power governors on Linux fail to yield a reasonable power management solution. 
+Furthermore, similar to the work of Liang et. al~\cite{and-dvfs} we aim to show that by providing information that characterizes the needs of a particular application, 
+better energy efficiency is achievable. We first profile applications and characterize them into buckets based on how compute intensive, cache sensitive and memory intensive they are. 
+Based on this information, an analytical model called E-MOS is used to reason about the frequency scaling of cores and achieve better energy efficiency. 
+The analytical model uses a decision table which is fed the parameters of an application and power management objectives to be achieved as inputs.
+It then computes possible actions that need to be taken to optimize energy efficiency.
+The model achieves a tradeoff between energy and performance by reducing, increasing or maintaining the CPU and DRAM frequency. 
+We evaluate the model's results by implementing its suggestions and testing with the Userspace power governor for a variety of applications. Our experiments only scale CPU frequency but we 
+observe X\% of energy savings with Y\% of performance loss compared to the default Linux power governors.
 
-This paper makes following contributions:
+This paper makes the following contributions:
 \begin{itemize}
-\item  An analysis and case study on existing linux power governors for different applications like compute intensive, cache sensitive , memory bound. 
-\item  An application aware analytical model called E-MOS which analyzes the tradeoff between energy efficiency and performance with application information
-\item  An improved energy-management policy, which tunes the core frequency to meet application demands and achieve better energy efficiency 
-\item  Evaluation of E-MOS with User-space governor with Ondemand power governor for variety of benchmarks
+\item  An analysis and case study of existing Linux power governors for different applications that can be categorized as compute intensive, cache sensitive and memory bound. 
+\item  An application aware analytical model called E-MOS which analyzes the tradeoff between energy efficiency and performance with application information.
+\item  An improved energy-management policy, which tunes the CPU frequency to meet application demand while achieving better energy efficiency.
+\item  A comparison of E-MOS with Linux's default power governors for variety of benchmarks.
 \end{itemize}
 
 \paragraph{Paper Organization} 
-We first discuss the related work in this field in Section ($\S$\ref{sec:rel}). 
-Then, we give an overview of existing linux power governors and layout the problems of
+We first discuss related work in the power management field in Section ($\S$\ref{sec:rel}). 
+Then, we give an overview of existing Linux power management solutions and layout the problems of current 
 OS power management in Section ($\S$\ref{sec:linux-powergov}). Section ($\S$\ref{sec:case-study})
-discusses a case-study of non-linear scaling in existing power governors.
-Section ($\S$\ref{sec:appl}) explains the application profiling and categorization. We also, present
-the existing power governors power management results here. Section ($\S$\ref{sec:analytic}) explains
-our E-MOS analytical model and the decision table. Section ($\S$\ref{sec:meth}) is the methodology we follow
-and Section ($\S$\ref{sec:results}) gives a detailed evaluation of our model. We discuss the
+discusses a case-study of non-linear scaling with existing power governors.
+Section ($\S$\ref{sec:appl}) explains the application profiling and categorization methodology and results. We also explore the performance of 
+the existing power governors in this section. Section ($\S$\ref{sec:analytic}) explains
+our E-MOS analytical model and the decision table it uses to make power management decisions. Section ($\S$\ref{sec:meth}) details our experimental methodology 
+while Section ($\S$\ref{sec:results}) gives a detailed evaluation of our model. We discuss the
 lessons we learnt in Section ($\S$\ref{sec:disc}) and finally conclude in Section ($\S$\ref{sec:conc}).
 
 

@@ -1,5 +1,32 @@
 \begin{abstract} \vspace{0.05in}
 
+Power management in Linux is either handled by static, fixed policy power governors or Intel's P-state drivers. 
+The former was designed to manage CPU idle states and scales frequency to do so while the latter was designed 
+with the race-to-idle (or race-to-sleep) concept. Both of these solutions manage system power by changing the 
+performance state of the CPU but they take a more holistic view of the system that could miss some of the nuances  
+present in the active applications.
+
+%Linux power governors operate on a generic energy management policy,
+%based on the assumption that reducing frequency of CPU (using DVFS) or 
+%putting the system to low-power state would reduce the system energy always,
+%without having necessary information about the application. 
+In this project, we explore the opportunities that application characterization present for more efficient power management 
+and provide an overview of the difficulties in Linux power management. 
+
+We present E-MOS (Efficient Energy Management Policies in Operating Systems),
+a power management model which uses applications characteristics (CPU/memory bound and cache sensitivity) to 
+make frequency scaling decisions in order to achieve better energy efficiency while balancing the performance and energy requirements of a system. 
+The decisions of this application aware policy 
+can be applied through the ACPI (Advanced Configuration and Power Interface) Userspace power governor. 
+E-MOS is evaluated on variety of benchmarks and we see energy savings 
+upto X\% for a Y\% performance loss.
+
+
+
+
+\end{abstract}
+
+\begin{comment}
 Current Linux Operating Systems' power governors do not provide a fine-grained control and management 
 over the energy utilized by the applications running on a computing system. 
 Linux power governors by default use "Ondemand" CPU frequency governor for 
@@ -23,8 +50,4 @@ tradeoff performance and energy consumption. E-MOS is
 evaluated on variety of benchmarks and we see energy savings 
 upto X\% for a Y\% performance loss.
 
-
-
-
-\end{abstract}
-
+\end{comment}
