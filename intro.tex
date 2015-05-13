@@ -30,22 +30,22 @@ Based on this information, an analytical model called E-MOS is used to reason ab
 The analytical model uses a decision table which is fed the parameters of an application and power management objectives to be achieved as inputs.
 It then computes possible actions that need to be taken to optimize energy efficiency.
 The model achieves a trade off between energy and performance by reducing, increasing or maintaining the CPU and DRAM frequency. 
-We evaluate the model's results by implementing its suggestions and testing with the Userspace power governor for a variety of applications. Our experiments only scale CPU frequency but we 
-observe X\% of energy savings with Y\% of performance loss compared to the default Linux power governors.
+We evaluate the model's results by implementing its suggestions and testing with the userspace power governor for a variety of applications. Our experiments only scale CPU frequency but we 
+observe energy savings of up to 2x with 13\% performance loss compared to the default Linux power governors.
 
 This paper makes the following contributions:
 \begin{itemize}
 \item  An analysis and case study of existing Linux power governors for different applications that can be categorized as compute intensive, cache sensitive and memory bound. 
 \item  An application aware analytical model called E-MOS which analyzes the trade off between energy efficiency and performance with application information.
 \item  An improved energy-management policy, which tunes the CPU frequency to meet application demand while achieving better energy efficiency.
-\item  A comparison of E-MOS with Linux's default power governors for variety of benchmarks.
+\item  A comparison of E-MOS with Linux's default power governors for a number of benchmarks.
 \end{itemize}
 
 \paragraph{Paper Organization} 
 We first discuss related work in the power management field in Section ($\S$\ref{sec:rel}). 
 We present a brief overview of the existing Linux power management solutions in Section ($\S$\ref{sec:linux-powergov}). 
 Section ($\S$\ref{sec:case-study}) discusses a case-study of non-linear scaling with existing power governors and motivates our work.
-Section ($\S$\ref{sec:appl}) explains the application categorization and reason out the 
+Section ($\S$\ref{sec:appl}) explains our application categorization and reasons about the 
 problems with existing Linux governors. 
 Section ($\S$\ref{sec:analytic}) explains
 our E-MOS analytical model and the decision table it uses to make application-aware energy management policy decisions. Section ($\S$\ref{sec:meth}) details our experimental methodology 
